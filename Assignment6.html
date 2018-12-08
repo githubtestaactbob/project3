@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assignment 6 by David Jaqua</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+var numShapes = 0;
+var numHiddenShapes = 0;
+var gameRunning = false;
+
+$(document).ready(function(){
+    
+	$("#startGame").click(function(){
+		
+		if (gameRunning == true){
+			return; // game is already running!
+		}
+		gameRunning = true;
+		for (var i = 0; i < 10; i++){
+			addShape();
+		}
+		
+		$("div").click(function(){
+			alert("div shape clicked");
+			if (gameRunning){
+				hideShape(this);
+			}
+		});
+	});
+});
+
+function addShape(){
+	numShapes++;
+	var xOff = getRandomPosition();
+	var yOff = getRandomPosition();
+	$("body").append("<div id='shape" + numShapes + "' style='background:#FF0000;height:100px;width:100px;top:" 
+		+ yOff + "px;left:" + xOff + "px;position:absolute;'></div>");
+}
+
+function hideShape(shapeDiv){
+	numHiddenShapes++;
+	$(shapeDiv).hide(1000); // hide shape over 1 second
+}
+
+function getRandomPosition(){
+	return Math.floor(Math.random()*700); // 0 to 700
+}
+</script> 
+</head>
+<body>
+
+<input type="button" value="Start the game!" id="startGame"><br>
+<h3 id="timer"></h3>
+
+<div style="background:#FF0000;height:100px;width:150px;top:10px;left:100px;position:absolute;"></div>
+
+</body>
+</html>
